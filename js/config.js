@@ -63,15 +63,15 @@ window.WEDDING = {
   },
 
   images: {
-    hero: "assets/images/1.jpg",
-    heroMobile: "assets/images/1.jpg",
-    groom: "assets/images/2.jpg",
-    bride: "assets/images/3.jpg",
-    couple: "assets/images/4.jpg",
-    bgQuote: "assets/images/5.jpg",
-    bgQuote1: "assets/images/6.jpg",
-    thankYou: "assets/images/7.jpg",
-    thankYouMobile: "assets/images/7.jpg",
+    hero: "assets/images/9.jpg",
+    heroMobile: "assets/images/9.jpg",
+    groom: "assets/images/6.jpg",
+    bride: "assets/images/5.jpg",
+    couple: "assets/images/2.jpg",
+    bgQuote: "assets/images/1.jpg",
+    bgQuote1: "assets/images/4.jpg",
+    thankYou: "assets/images/6.jpg",
+    thankYouMobile: "assets/images/9.jpg",
     album: [
       "assets/images/1.jpg",
       "assets/images/2.jpg",
@@ -79,8 +79,6 @@ window.WEDDING = {
       "assets/images/4.jpg",
       "assets/images/5.jpg",
       "assets/images/6.jpg",
-      "assets/images/7.jpg",
-      "assets/images/8.jpg",
       "assets/images/9.jpg",
     ],
   },
@@ -91,35 +89,4 @@ window.WEDDING = {
     title: "Hơn Cả Yêu",
   },
 
-  story: {
-    intro:
-      "Hôm nay, tụi mình muốn kể lại câu chuyện ấy với những người mình yêu quý nhất. Mỗi cột mốc dưới đây vẫn là lời nháp — bạn hãy thay bằng hành trình thật của hai bạn.",
-    items: [
-      {
-        period: "20XX",
-        title: "Lần đầu gặp nhau",
-        text: "Thay đoạn này bằng khoảnh khắc hai bạn gặp nhau lần đầu — một lớp học, một quán cà phê, hay một lần tình cờ nào đó đã mở đầu câu chuyện.",
-      },
-      {
-        period: "20XX",
-        title: "Ngày chúng mình bắt đầu",
-        text: "Thay bằng ngày chính thức bên nhau: nơi ấy, lời ấy, và cảm xúc của buổi hẹn đã biến hai người thành một cặp.",
-      },
-      {
-        period: "20XX",
-        title: "Cùng nhau trưởng thành",
-        text: "Những ngày thường nhật, những lần chờ đợi và những cái nắm tay giữa bao bộn bề đã dạy hai bạn cách yêu thương, thấu hiểu và trân trọng nhau hơn.",
-      },
-      {
-        period: "20XX",
-        title: "Lời hứa nghiêm túc",
-        text: "Thay bằng câu chuyện cầu hôn — không còn là lời tỏ tình của những ngày đầu, mà là lời hứa về một mái ấm và một hành trình sẽ luôn có nhau.",
-      },
-      {
-        period: "2026",
-        title: "Về chung một nhà",
-        text: "Hôn nhân không phải là đích đến của tình yêu, mà là khởi đầu cho một hành trình mới. Từ hôm nay, chúng mình sẽ cùng nhau vun đắp một mái ấm và viết tiếp những chương đẹp nhất của câu chuyện mang tên “chúng mình”.",
-      },
-    ],
-  },
 };

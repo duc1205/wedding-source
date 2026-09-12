@@ -35,23 +35,6 @@
     }
   };
 
-  const renderStory = () => {
-    const intro = document.getElementById("story-intro");
-    const list = document.getElementById("story-timeline");
-    if (intro) intro.textContent = W.story.intro;
-    if (!list) return;
-    list.innerHTML = W.story.items
-      .map(
-        (item) => `
-        <article class="journey-item reveal-block reveal">
-          <p class="journey-period">${item.period}</p>
-          <h3>${item.title}</h3>
-          <p>${item.text}</p>
-        </article>`
-      )
-      .join("");
-  };
-
   const renderCalendar = () => {
     const grid = document.getElementById("calendar-grid");
     const label = document.getElementById("calendar-month");
@@ -319,7 +302,6 @@
 
   applyBindings();
   setBackgrounds();
-  renderStory();
   renderCalendar();
   startCountdown();
   setupAlbum();

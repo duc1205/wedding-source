@@ -1,0 +1,9 @@
+.DS_Store
+_preview-*.png
+_m-*.png
+_check-*.png
+_vuquy.png
+_ref/
+_ref.html
+assets/music/*.mp3
+!assets/music/.gitkeep

@@ -43,8 +43,7 @@ window.WEDDING = {
     lunar: "(Tức ngày 09 tháng 08 năm Bính Ngọ)",
     restaurant: "TƯ GIA NHÀ GÁI",
     restaurantAddress: "Xóm Xuân Tường - xã Xuân Lâm - tỉnh Nghệ An",
-    restaurantMapLink:
-      "https://www.google.com/maps/search/?api=1&query=Xóm+Xuân+Tường+xã+Xuân+Lâm+Nghệ+An",
+    restaurantMapLink: "https://maps.app.goo.gl/oEWU6basVXpcpBPY6",
     calendarDay: 19,
   },
 

@@ -25,9 +25,7 @@
     const quoteBgImg = document.getElementById("quote-bg-img");
     const thanksImg = document.getElementById("thank-you-img");
     const mobile = window.matchMedia("(max-width: 767px)").matches;
-    if (hero) {
-      hero.style.backgroundImage = `url("${mobile ? W.images.heroMobile : W.images.hero}")`;
-    }
+    if (hero) hero.src = mobile ? W.images.heroMobile : W.images.hero;
     if (quoteImg) quoteImg.src = W.images.bgQuote;
     if (quoteBgImg) quoteBgImg.src = W.images.bgQuote1;
     if (thanksImg) thanksImg.src = mobile ? W.images.thankYouMobile : W.images.thankYou;
@@ -288,16 +286,6 @@
     });
   };
 
-  const setupParallax = () => {
-    const bg = document.getElementById("hero-bg");
-    if (!bg || window.matchMedia("(max-width: 767px)").matches) return;
-    const onScroll = () => {
-      const y = Math.min(window.scrollY, 600);
-      bg.style.transform = `translateY(${y * 0.18}px)`;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-  };
-
   applyBindings();
   setBackgrounds();
   renderCalendar();
@@ -308,7 +296,6 @@
   setupPetals();
   setupHearts();
   setupMusic();
-  setupParallax();
   window.addEventListener("resize", setBackgrounds);
 
   document.title = `${W.couple.groomShort} - ${W.couple.brideShort}, ${W.date.simplify}`;

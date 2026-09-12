@@ -68,9 +68,9 @@ window.WEDDING = {
     groom: "assets/images/6.jpg",
     bride: "assets/images/5.jpg",
     couple: "assets/images/2.jpg",
-    bgQuote: "assets/images/1.jpg",
-    bgQuote1: "assets/images/4.jpg",
-    thankYou: "assets/images/6.jpg",
+    bgQuote: "assets/images/5.jpg",
+    bgQuote1: "assets/images/6.jpg",
+    thankYou: "assets/images/9.jpg",
     thankYouMobile: "assets/images/9.jpg",
     album: [
       "assets/images/1.jpg",

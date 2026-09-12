@@ -85,8 +85,9 @@ window.WEDDING = {
 
   music: {
     provider: "soundcloud",
-    url: "https://soundcloud.com/bau-studio/hon-ca-yeu-tran-vinh-quang",
-    title: "Hơn Cả Yêu",
+    url: "https://soundcloud.com/thanh-le-110000981/bui-anh-tuan-hien-hocuoi-nhau-di-yes-i-docuoi-nhau-di-yes-i-do",
+    title: "Cưới Nhau Đi (Yes I Do)",
+    startMs: 33000,
   },
 
 };

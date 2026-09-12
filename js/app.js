@@ -210,7 +210,7 @@
       ring?.classList.add("is-active");
       shell?.classList.add("is-exiting");
       window.playWeddingMusic?.();
-      setTimeout(() => closeCover(true), 720);
+      setTimeout(() => closeCover(true), 420);
     };
 
     button.addEventListener("click", () => closeCover(false));
@@ -258,31 +258,44 @@
     if (!button || !iframe || typeof SC === "undefined") return;
 
     const widget = SC.Widget(iframe);
+    const startMs = Number(W.music?.startMs) || 0;
     let playing = false;
     let ready = false;
+    let wantPlay = false;
 
     const setPlaying = (on) => {
       playing = on;
       button.classList.toggle("is-paused", !on);
     };
 
-    const play = () => {
-      if (!ready) return;
+    const cueAndPlay = () => {
       widget.play();
+      if (startMs > 0) widget.seekTo(startMs);
+    };
+
+    const play = () => {
+      wantPlay = true;
+      widget.play();
+      if (ready && startMs > 0) widget.seekTo(startMs);
     };
 
     widget.bind(SC.Widget.Events.READY, () => {
       ready = true;
       widget.bind(SC.Widget.Events.PLAY, () => setPlaying(true));
       widget.bind(SC.Widget.Events.PAUSE, () => setPlaying(false));
-      widget.bind(SC.Widget.Events.FINISH, () => widget.play());
+      widget.bind(SC.Widget.Events.FINISH, () => cueAndPlay());
+      if (wantPlay) cueAndPlay();
     });
 
     window.playWeddingMusic = play;
 
     button.addEventListener("click", () => {
-      if (playing) widget.pause();
-      else play();
+      if (playing) {
+        wantPlay = false;
+        widget.pause();
+      } else {
+        play();
+      }
     });
   };
 
@@ -292,10 +305,10 @@
   startCountdown();
   setupAlbum();
   setupReveal();
+  setupMusic();
   setupCover();
   setupPetals();
   setupHearts();
-  setupMusic();
   window.addEventListener("resize", setBackgrounds);
 
   document.title = `${W.couple.groomShort} - ${W.couple.brideShort}, ${W.date.simplify}`;

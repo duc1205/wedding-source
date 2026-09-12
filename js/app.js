@@ -230,6 +230,7 @@
       heart?.classList.add("is-breaking");
       ring?.classList.add("is-active");
       shell?.classList.add("is-exiting");
+      window.playWeddingMusic?.();
       setTimeout(() => closeCover(true), 720);
     };
 
@@ -273,22 +274,36 @@
   };
 
   const setupMusic = () => {
-    const audio = document.getElementById("bg-music");
     const button = document.getElementById("music-btn");
-    if (!audio || !button) return;
-    audio.src = W.music;
-    button.addEventListener("click", async () => {
-      if (audio.paused) {
-        try {
-          await audio.play();
-          button.classList.remove("is-paused");
-        } catch {
-          button.classList.add("is-paused");
-        }
-      } else {
-        audio.pause();
-        button.classList.add("is-paused");
-      }
+    const iframe = document.getElementById("sc-player");
+    if (!button || !iframe || typeof SC === "undefined") return;
+
+    const widget = SC.Widget(iframe);
+    let playing = false;
+    let ready = false;
+
+    const setPlaying = (on) => {
+      playing = on;
+      button.classList.toggle("is-paused", !on);
+    };
+
+    const play = () => {
+      if (!ready) return;
+      widget.play();
+    };
+
+    widget.bind(SC.Widget.Events.READY, () => {
+      ready = true;
+      widget.bind(SC.Widget.Events.PLAY, () => setPlaying(true));
+      widget.bind(SC.Widget.Events.PAUSE, () => setPlaying(false));
+      widget.bind(SC.Widget.Events.FINISH, () => widget.play());
+    });
+
+    window.playWeddingMusic = play;
+
+    button.addEventListener("click", () => {
+      if (playing) widget.pause();
+      else play();
     });
   };
 

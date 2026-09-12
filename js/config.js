@@ -84,7 +84,11 @@ window.WEDDING = {
     ],
   },
 
-  music: "assets/music/bg-music.mp3",
+  music: {
+    provider: "soundcloud",
+    url: "https://soundcloud.com/bau-studio/hon-ca-yeu-tran-vinh-quang",
+    title: "Hơn Cả Yêu",
+  },
 
   story: {
     intro:

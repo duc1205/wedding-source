@@ -1254,6 +1254,15 @@ body.is-locked {
 }
 
 /* ========== Music + hearts ========== */
+.sc-player {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  border: 0;
+}
+
 .music-btn {
   position: fixed;
   right: calc(10px + env(safe-area-inset-right, 0px));

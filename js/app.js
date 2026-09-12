@@ -21,18 +21,16 @@
 
   const setBackgrounds = () => {
     const hero = document.getElementById("hero-bg");
-    const quote = document.getElementById("quote-stage");
-    const quoteBg = document.getElementById("quote-bg");
-    const thanks = document.getElementById("thank-you");
+    const quoteImg = document.getElementById("quote-stage-img");
+    const quoteBgImg = document.getElementById("quote-bg-img");
+    const thanksImg = document.getElementById("thank-you-img");
     const mobile = window.matchMedia("(max-width: 767px)").matches;
     if (hero) {
       hero.style.backgroundImage = `url("${mobile ? W.images.heroMobile : W.images.hero}")`;
     }
-    if (quote) quote.style.backgroundImage = `url("${W.images.bgQuote}")`;
-    if (quoteBg) quoteBg.style.backgroundImage = `url("${W.images.bgQuote1}")`;
-    if (thanks) {
-      thanks.style.backgroundImage = `url("${mobile ? W.images.thankYouMobile : W.images.thankYou}")`;
-    }
+    if (quoteImg) quoteImg.src = W.images.bgQuote;
+    if (quoteBgImg) quoteBgImg.src = W.images.bgQuote1;
+    if (thanksImg) thanksImg.src = mobile ? W.images.thankYouMobile : W.images.thankYou;
   };
 
   const renderCalendar = () => {

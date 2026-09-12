@@ -314,7 +314,7 @@ body.is-locked {
   position: absolute;
   inset: -8% 0;
   z-index: 0;
-  background-position: 50% 16%;
+  background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
   will-change: transform;
@@ -498,19 +498,19 @@ body.is-locked {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 16%;
+  object-position: center top;
 }
 
 .collage-left img {
-  object-position: 78% 14%;
+  object-position: 78% top;
 }
 
 .collage-right img {
-  object-position: 50% 12%;
+  object-position: center top;
 }
 
 .collage-center img {
-  object-position: 50% 14%;
+  object-position: center top;
 }
 
 .collage-left,
@@ -783,14 +783,27 @@ body.is-locked {
 }
 
 /* ========== Quote ========== */
-.quote-stage {
+.quote-stage,
+.quote-section-reveal,
+.banner_bottom {
+  background: #1c1616;
+}
+
+.quote-photo-wrap {
   position: relative;
-  min-height: 76vh;
-  min-height: 76svh;
+  width: min(100%, 640px);
+  margin: 0 auto;
   overflow: hidden;
-  background-position: 50% 16%;
-  background-repeat: no-repeat;
-  background-size: cover;
+}
+
+.quote-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  background: #f4efe8;
 }
 
 .quote-shade {
@@ -832,12 +845,6 @@ body.is-locked {
 
 .quote-bg {
   position: relative;
-  min-height: 700px;
-  overflow: hidden;
-  background-position: 50% 14%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  box-shadow: 0 20px 36px -24px #404a1d38;
 }
 
 .quote-overlay {
@@ -1233,27 +1240,25 @@ body.is-locked {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 16%;
+  object-position: center top;
 }
 
 /* ========== Thank you ========== */
 .banner_bottom {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center;
-  height: 580px;
-  background-position: 50% 16%;
-  background-size: cover;
-  background-repeat: no-repeat;
+  display: block;
 }
 
 .banner_bottom .container {
+  position: absolute;
+  left: 50%;
+  bottom: 48px;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 15px;
-  margin-bottom: 150px;
+  margin: 0;
+  transform: translateX(-50%);
 }
 
 .banner_bottom h2 {
@@ -1542,11 +1547,6 @@ body.is-locked {
     height: 40px;
   }
 
-  .banner_bottom {
-    height: min(72vh, 580px);
-    min-height: 420px;
-  }
-
   .banner_bottom h2 {
     font-size: clamp(42px, 14vw, 60px);
   }
@@ -1665,7 +1665,8 @@ body.is-locked {
   }
   .banner-name { font-size: 26px; text-align: center; }
   .display-tc { padding-bottom: clamp(42px, 9vh, 96px); }
-  .hero-parallax-bg { inset: -14% 0; background-position: 50% 16%; }
+  .hero-parallax-bg { inset: -8% 0; background-position: center top; }
+  .quote-photo-wrap { width: min(100%, 680px); }
   .section-heading { font-size: 25px; }
   .intro-block p { font-size: 20px; }
   .couple-collage-section { padding: 80px 0 280px; }
@@ -1689,14 +1690,7 @@ body.is-locked {
   .invite-fullname { font-size: 64px; }
   .ceremony-time { font-size: 56px; }
   .count-num { font-size: 42px; }
-  .quote-stage { min-height: 1100px; }
-  .quote-bg { min-height: clamp(660px, 58vw, 1100px); }
   .quote-text { font-size: clamp(17px, 1.9vw, 26px); }
-  .banner_bottom {
-    height: 450px;
-    justify-content: center;
-  }
-  .banner_bottom .container { margin-bottom: 0; }
   .banner_bottom h2 { font-size: 50px; }
   .music-btn {
     width: 56px;

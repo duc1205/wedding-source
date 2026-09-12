@@ -73,7 +73,10 @@
       const isGroom = day === groomDay;
       if (isBride || isGroom) {
         const mark = isBride && isGroom ? "mark-groom" : isBride ? "mark-bride" : "mark-groom";
-        html += `<div class="calendar-cell ${mark}"><span class="heart-marker"></span><span class="heart-day">${day}</span></div>`;
+        const outline = isBride
+          ? `<svg class="heart-outline" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.7-4.35-9.33-8.2C.7 9.96 1.56 6.5 4.4 5.2c1.86-.85 4.05-.2 5.2 1.46C10.75 5 12.94 4.35 14.8 5.2c2.84 1.3 3.7 4.76 1.73 7.6C18.7 16.65 12 21 12 21z"/></svg>`
+          : "";
+        html += `<div class="calendar-cell ${mark}"><span class="heart-marker">${outline}</span><span class="heart-day">${day}</span></div>`;
       } else {
         html += `<div class="calendar-cell"><span class="day-number">${day}</span></div>`;
       }
@@ -268,10 +271,10 @@
   const setupMusic = () => {
     const button = document.getElementById("music-btn");
     const iframe = document.getElementById("sc-player");
-    if (!button || !iframe || typeof SC === "undefined") return;
+    if (!button || !iframe) return;
 
-    const widget = SC.Widget(iframe);
     const startMs = Number(W.music?.startMs) || 0;
+    let widget = null;
     let playing = false;
     let ready = false;
     let wantPlay = false;
@@ -281,31 +284,61 @@
       button.classList.toggle("is-paused", !on);
     };
 
-    const cueAndPlay = () => {
-      widget.play();
-      if (startMs > 0) widget.seekTo(startMs);
+    const seekToCue = () => {
+      if (widget && startMs > 0) widget.seekTo(startMs);
+    };
+
+    const bindWidget = () => {
+      if (typeof SC === "undefined") return;
+      widget = SC.Widget(iframe);
+      widget.bind(SC.Widget.Events.READY, () => {
+        ready = true;
+        widget.bind(SC.Widget.Events.PLAY, () => setPlaying(true));
+        widget.bind(SC.Widget.Events.PAUSE, () => setPlaying(false));
+        widget.bind(SC.Widget.Events.FINISH, () => {
+          seekToCue();
+          widget.play();
+        });
+        if (wantPlay) {
+          widget.play();
+          seekToCue();
+        }
+      });
+    };
+
+    const enableAutoplay = () => {
+      const src = iframe.getAttribute("src") || "";
+      if (src.includes("auto_play=true")) return;
+      iframe.src = src.replace("auto_play=false", "auto_play=true");
     };
 
     const play = () => {
       wantPlay = true;
-      widget.play();
-      if (ready && startMs > 0) widget.seekTo(startMs);
+      enableAutoplay();
+      if (widget && ready) {
+        widget.play();
+        seekToCue();
+      } else if (typeof SC !== "undefined") {
+        bindWidget();
+        widget?.play();
+      }
     };
 
-    widget.bind(SC.Widget.Events.READY, () => {
-      ready = true;
-      widget.bind(SC.Widget.Events.PLAY, () => setPlaying(true));
-      widget.bind(SC.Widget.Events.PAUSE, () => setPlaying(false));
-      widget.bind(SC.Widget.Events.FINISH, () => cueAndPlay());
-      if (wantPlay) cueAndPlay();
-    });
-
     window.playWeddingMusic = play;
+    bindWidget();
+    iframe.addEventListener("load", bindWidget);
+
+    if (typeof SC === "undefined") {
+      const script = document.createElement("script");
+      script.src = "https://w.soundcloud.com/player/api.js";
+      script.onload = bindWidget;
+      document.head.appendChild(script);
+    }
 
     button.addEventListener("click", () => {
       if (playing) {
         wantPlay = false;
-        widget.pause();
+        widget?.pause();
       } else {
         play();
       }

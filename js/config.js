@@ -91,6 +91,7 @@ window.WEDDING = {
   music: {
     provider: "soundcloud",
     url: "https://soundcloud.com/thanh-le-110000981/bui-anh-tuan-hien-hocuoi-nhau-di-yes-i-docuoi-nhau-di-yes-i-do",
+    trackId: "617343069",
     title: "Cưới Nhau Đi (Yes I Do)",
     startMs: 33000,
   },

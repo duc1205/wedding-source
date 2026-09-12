@@ -59,7 +59,7 @@ window.WEDDING = {
     restaurant: "SÂN THỂ THAO THÔN VĂN LONG",
     restaurantAddress: "Xã Đại Đồng, tỉnh Nghệ An",
     restaurantMapLink:
-      "https://www.google.com/maps/search/?api=1&query=Sân+thể+thao+thôn+Văn+Long+xã+Đại+Đồng+Nghệ+An",
+      "https://www.google.com/maps/place/Q8V4%2BR2G+Qu%C3%A1n+T%E1%BA%A1p+Ho%C3%A1+B%E1%BA%A3y+Ho%C3%A0,+V%C3%B5+Th%C3%BAc+%C4%90%E1%BB%93ng,+V%C4%83n+long,+Thanh+Ch%C6%B0%C6%A1ng,+Ngh%E1%BB%87+An/data=!4m2!3m1!1s0x3139e500488d13d1:0xfb601a89a24e6f01",
     calendarDay: 20,
   },
 

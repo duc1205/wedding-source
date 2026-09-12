@@ -72,11 +72,11 @@
       const isBride = day === brideDay;
       const isGroom = day === groomDay;
       if (isBride || isGroom) {
-        if (isBride) {
-          html += `<div class="calendar-cell mark-bride"><span class="heart-wrap"><span class="heart-marker heart-outer"></span><span class="heart-marker heart-inner"></span></span><span class="heart-day">${day}</span></div>`;
-        } else {
-          html += `<div class="calendar-cell mark-groom"><span class="heart-marker"></span><span class="heart-day">${day}</span></div>`;
-        }
+        const path = "M12 21s-6.7-4.35-9.33-8.2C.7 9.96 1.56 6.5 4.4 5.2c1.86-.85 4.05-.2 5.2 1.46C10.75 5 12.94 4.35 14.8 5.2c2.84 1.3 3.7 4.76 1.73 7.6C18.7 16.65 12 21 12 21z";
+        const heart = isBride
+          ? `<svg class="cal-heart" viewBox="0 0 24 24" aria-hidden="true"><path class="cal-heart-border" d="${path}"/><path class="cal-heart-hole" d="${path}" transform="translate(12 12.6) scale(0.72) translate(-12 -12.6)"/></svg>`
+          : `<svg class="cal-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"/></svg>`;
+        html += `<div class="calendar-cell ${isBride ? "mark-bride" : "mark-groom"}">${heart}<span class="heart-day">${day}</span></div>`;
       } else {
         html += `<div class="calendar-cell"><span class="day-number">${day}</span></div>`;
       }
@@ -273,13 +273,12 @@
     const audio = document.getElementById("wedding-audio");
     if (!button) return;
 
-    const start = Number(W.music?.startSeconds ?? (W.music?.startMs || 0) / 1000) || 0;
+    const start = Number(W.music?.startSeconds) || 0;
     const file = W.music?.file;
-    const youtubeId = W.music?.youtubeId;
-    let player = null;
-    let ytReady = false;
-    let wantPlay = false;
+    const trackId = W.music?.trackId || "617343069";
+    let widget = null;
     let playing = false;
+    let wantPlay = false;
     let usingAudio = false;
 
     const setPlaying = (on) => {
@@ -287,91 +286,83 @@
       button.classList.toggle("is-paused", !on);
     };
 
-    const playAudio = () => {
-      if (!audio || !file) return false;
-      usingAudio = true;
-      audio.currentTime = start;
-      const result = audio.play();
-      if (result && typeof result.then === "function") {
-        result.then(() => setPlaying(true)).catch(() => {
-          usingAudio = false;
-          playYouTube();
-        });
+    const ensureWidgetApi = (onReady) => {
+      if (typeof SC !== "undefined") {
+        onReady();
+        return;
       }
-      return true;
+      const existing = document.querySelector("script[data-sc-api]");
+      if (existing) {
+        existing.addEventListener("load", onReady, { once: true });
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://w.soundcloud.com/player/api.js";
+      script.dataset.scApi = "true";
+      script.onload = onReady;
+      document.head.appendChild(script);
     };
 
-    const playYouTube = () => {
-      if (!player || !ytReady) return;
-      player.seekTo(start, true);
-      player.playVideo();
+    const bindFrame = (iframe) => {
+      ensureWidgetApi(() => {
+        if (typeof SC === "undefined") return;
+        widget = SC.Widget(iframe);
+        widget.bind(SC.Widget.Events.READY, () => {
+          if (start > 0) widget.seekTo(start * 1000);
+          widget.bind(SC.Widget.Events.PLAY, () => setPlaying(true));
+          widget.bind(SC.Widget.Events.PAUSE, () => setPlaying(false));
+          widget.bind(SC.Widget.Events.FINISH, () => {
+            widget.seekTo(start * 1000);
+            widget.play();
+          });
+        });
+      });
+    };
+
+    const playStream = () => {
+      let iframe = document.getElementById("music-frame");
+      if (!iframe) {
+        iframe = document.createElement("iframe");
+        iframe.id = "music-frame";
+        iframe.title = W.music?.title || "Nhạc cưới";
+        iframe.setAttribute("allow", "autoplay; encrypted-media");
+        iframe.setAttribute("allowfullscreen", "true");
+        document.body.appendChild(iframe);
+        iframe.addEventListener("load", () => bindFrame(iframe));
+      }
+      iframe.src =
+        `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${trackId}` +
+        `&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false`;
+      setPlaying(true);
     };
 
     const play = () => {
       wantPlay = true;
-      if (file && audio) playAudio();
-      else playYouTube();
+      if (file && audio) {
+        usingAudio = true;
+        audio.src = file;
+        audio.loop = true;
+        audio.currentTime = start;
+        const result = audio.play();
+        if (result && typeof result.catch === "function") {
+          result.then(() => setPlaying(true)).catch(() => {
+            usingAudio = false;
+            playStream();
+          });
+        }
+        return;
+      }
+      playStream();
     };
 
     const pause = () => {
       wantPlay = false;
       if (usingAudio && audio) audio.pause();
-      player?.pauseVideo?.();
+      widget?.pause();
       setPlaying(false);
     };
 
     window.playWeddingMusic = play;
-
-    if (audio) {
-      if (file) {
-        audio.src = file;
-        audio.loop = true;
-      }
-      audio.addEventListener("play", () => setPlaying(true));
-      audio.addEventListener("pause", () => {
-        if (usingAudio) setPlaying(false);
-      });
-    }
-
-    if (youtubeId) {
-      window.onYouTubeIframeAPIReady = () => {
-        player = new YT.Player("yt-player", {
-          width: "200",
-          height: "80",
-          videoId: youtubeId,
-          playerVars: {
-            start,
-            playsinline: 1,
-            controls: 0,
-            disablekb: 1,
-            fs: 0,
-            modestbranding: 1,
-            rel: 0,
-            origin: location.origin,
-          },
-          events: {
-            onReady: () => {
-              ytReady = true;
-              if (wantPlay && !usingAudio) playYouTube();
-            },
-            onStateChange: (event) => {
-              if (typeof YT === "undefined") return;
-              if (event.data === YT.PlayerState.PLAYING) setPlaying(true);
-              if (event.data === YT.PlayerState.PAUSED) setPlaying(false);
-              if (event.data === YT.PlayerState.ENDED) {
-                player.seekTo(start, true);
-                player.playVideo();
-              }
-            },
-          },
-        });
-      };
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.head.appendChild(tag);
-      if (window.YT && YT.Player) window.onYouTubeIframeAPIReady();
-    }
-
     button.addEventListener("click", () => {
       if (playing) pause();
       else play();

@@ -90,7 +90,7 @@ window.WEDDING = {
 
   music: {
     file: "",
-    youtubeId: "o_lN37OAJ9U",
+    trackId: "617343069",
     title: "Cưới Nhau Đi (Yes I Do)",
     startSeconds: 33,
   },

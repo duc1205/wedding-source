@@ -990,7 +990,7 @@ body.is-locked {
 .calendar-cell {
   display: grid;
   place-items: center;
-  min-height: 34px;
+  min-height: 42px;
 }
 
 .day-number {
@@ -998,39 +998,28 @@ body.is-locked {
   font-size: 16px;
 }
 
-.heart-marker {
-  position: relative;
-  width: 24px;
-  height: 21px;
-  display: inline-block;
-  background: linear-gradient(135deg, #ba4a59, #a23d4b);
-  transform: rotate(-45deg);
-  box-shadow: 0 6px 14px -8px #7d243559;
-}
-
-.heart-marker::before,
-.heart-marker::after {
-  content: "";
-  position: absolute;
-  width: 24px;
-  height: 21px;
-  border-radius: 9999px;
-  background: inherit;
-}
-
-.heart-marker::before {
-  top: -10px;
-  left: 0;
-}
-
-.heart-marker::after {
-  top: 0;
-  left: 10px;
-}
-
 .mark-bride,
 .mark-groom {
   position: relative;
+}
+
+.cal-heart {
+  display: block;
+  width: 36px;
+  height: 32px;
+  overflow: visible;
+}
+
+.mark-groom .cal-heart {
+  fill: #ba4a59;
+}
+
+.mark-bride .cal-heart-border {
+  fill: #ba4a59;
+}
+
+.mark-bride .cal-heart-hole {
+  fill: #fffaf7;
 }
 
 .heart-day {
@@ -1043,54 +1032,6 @@ body.is-locked {
   font-size: 12px;
   font-weight: 500;
   pointer-events: none;
-}
-
-.mark-groom .heart-marker {
-  background: linear-gradient(135deg, #ba4a59, #a23d4b);
-}
-
-.heart-wrap {
-  position: relative;
-  display: block;
-  width: 24px;
-  height: 21px;
-}
-
-.mark-bride .heart-outer,
-.mark-bride .heart-inner {
-  position: absolute;
-  left: 0;
-  top: 0;
-  box-shadow: none;
-}
-
-.mark-bride .heart-outer,
-.mark-bride .heart-outer::before,
-.mark-bride .heart-outer::after {
-  background: #ba4a59;
-}
-
-.mark-bride .heart-inner,
-.mark-bride .heart-inner::before,
-.mark-bride .heart-inner::after {
-  width: 14px;
-  height: 12px;
-  background: #fffaf7;
-}
-
-.mark-bride .heart-inner {
-  left: 5px;
-  top: 4px;
-}
-
-.mark-bride .heart-inner::before {
-  top: -6px;
-  left: 0;
-}
-
-.mark-bride .heart-inner::after {
-  top: 0;
-  left: 6px;
 }
 
 .mark-bride .heart-day {
@@ -1327,16 +1268,16 @@ body.is-locked {
 }
 
 /* ========== Music + hearts ========== */
-.yt-player {
+#music-frame {
   position: fixed;
-  left: 0;
+  left: -400px;
   bottom: 0;
   z-index: 0;
-  width: 200px;
-  height: 80px;
-  opacity: 0.02;
+  width: 320px;
+  height: 180px;
+  opacity: 0;
   pointer-events: none;
-  overflow: hidden;
+  border: 0;
 }
 
 .music-btn {
@@ -1671,40 +1612,13 @@ body.is-locked {
     font-size: 13px;
   }
 
-  .heart-marker,
-  .heart-marker::before,
-  .heart-marker::after {
-    width: 22px;
-    height: 19px;
-  }
-
   .heart-day {
     font-size: 11px;
   }
 
-  .heart-wrap {
-    width: 22px;
-    height: 19px;
-  }
-
-  .mark-bride .heart-inner,
-  .mark-bride .heart-inner::before,
-  .mark-bride .heart-inner::after {
-    width: 12px;
-    height: 11px;
-  }
-
-  .mark-bride .heart-inner {
-    left: 5px;
-    top: 4px;
-  }
-
-  .mark-bride .heart-inner::before {
-    top: -5px;
-  }
-
-  .mark-bride .heart-inner::after {
-    left: 5px;
+  .cal-heart {
+    width: 34px;
+    height: 30px;
   }
 }
 

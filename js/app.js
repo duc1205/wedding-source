@@ -72,11 +72,11 @@
       const isBride = day === brideDay;
       const isGroom = day === groomDay;
       if (isBride || isGroom) {
-        const mark = isBride && isGroom ? "mark-groom" : isBride ? "mark-bride" : "mark-groom";
-        const outline = isBride
-          ? `<svg class="heart-outline" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.7-4.35-9.33-8.2C.7 9.96 1.56 6.5 4.4 5.2c1.86-.85 4.05-.2 5.2 1.46C10.75 5 12.94 4.35 14.8 5.2c2.84 1.3 3.7 4.76 1.73 7.6C18.7 16.65 12 21 12 21z"/></svg>`
-          : "";
-        html += `<div class="calendar-cell ${mark}"><span class="heart-marker">${outline}</span><span class="heart-day">${day}</span></div>`;
+        if (isBride) {
+          html += `<div class="calendar-cell mark-bride"><span class="heart-wrap"><span class="heart-marker heart-outer"></span><span class="heart-marker heart-inner"></span></span><span class="heart-day">${day}</span></div>`;
+        } else {
+          html += `<div class="calendar-cell mark-groom"><span class="heart-marker"></span><span class="heart-day">${day}</span></div>`;
+        }
       } else {
         html += `<div class="calendar-cell"><span class="day-number">${day}</span></div>`;
       }
@@ -270,78 +270,111 @@
 
   const setupMusic = () => {
     const button = document.getElementById("music-btn");
-    const iframe = document.getElementById("sc-player");
-    if (!button || !iframe) return;
+    const audio = document.getElementById("wedding-audio");
+    if (!button) return;
 
-    const startMs = Number(W.music?.startMs) || 0;
-    let widget = null;
-    let playing = false;
-    let ready = false;
+    const start = Number(W.music?.startSeconds ?? (W.music?.startMs || 0) / 1000) || 0;
+    const file = W.music?.file;
+    const youtubeId = W.music?.youtubeId;
+    let player = null;
+    let ytReady = false;
     let wantPlay = false;
+    let playing = false;
+    let usingAudio = false;
 
     const setPlaying = (on) => {
       playing = on;
       button.classList.toggle("is-paused", !on);
     };
 
-    const seekToCue = () => {
-      if (widget && startMs > 0) widget.seekTo(startMs);
-    };
-
-    const bindWidget = () => {
-      if (typeof SC === "undefined") return;
-      widget = SC.Widget(iframe);
-      widget.bind(SC.Widget.Events.READY, () => {
-        ready = true;
-        widget.bind(SC.Widget.Events.PLAY, () => setPlaying(true));
-        widget.bind(SC.Widget.Events.PAUSE, () => setPlaying(false));
-        widget.bind(SC.Widget.Events.FINISH, () => {
-          seekToCue();
-          widget.play();
+    const playAudio = () => {
+      if (!audio || !file) return false;
+      usingAudio = true;
+      audio.currentTime = start;
+      const result = audio.play();
+      if (result && typeof result.then === "function") {
+        result.then(() => setPlaying(true)).catch(() => {
+          usingAudio = false;
+          playYouTube();
         });
-        if (wantPlay) {
-          widget.play();
-          seekToCue();
-        }
-      });
+      }
+      return true;
     };
 
-    const enableAutoplay = () => {
-      const src = iframe.getAttribute("src") || "";
-      if (src.includes("auto_play=true")) return;
-      iframe.src = src.replace("auto_play=false", "auto_play=true");
+    const playYouTube = () => {
+      if (!player || !ytReady) return;
+      player.seekTo(start, true);
+      player.playVideo();
     };
 
     const play = () => {
       wantPlay = true;
-      enableAutoplay();
-      if (widget && ready) {
-        widget.play();
-        seekToCue();
-      } else if (typeof SC !== "undefined") {
-        bindWidget();
-        widget?.play();
-      }
+      if (file && audio) playAudio();
+      else playYouTube();
+    };
+
+    const pause = () => {
+      wantPlay = false;
+      if (usingAudio && audio) audio.pause();
+      player?.pauseVideo?.();
+      setPlaying(false);
     };
 
     window.playWeddingMusic = play;
-    bindWidget();
-    iframe.addEventListener("load", bindWidget);
 
-    if (typeof SC === "undefined") {
-      const script = document.createElement("script");
-      script.src = "https://w.soundcloud.com/player/api.js";
-      script.onload = bindWidget;
-      document.head.appendChild(script);
+    if (audio) {
+      if (file) {
+        audio.src = file;
+        audio.loop = true;
+      }
+      audio.addEventListener("play", () => setPlaying(true));
+      audio.addEventListener("pause", () => {
+        if (usingAudio) setPlaying(false);
+      });
+    }
+
+    if (youtubeId) {
+      window.onYouTubeIframeAPIReady = () => {
+        player = new YT.Player("yt-player", {
+          width: "200",
+          height: "80",
+          videoId: youtubeId,
+          playerVars: {
+            start,
+            playsinline: 1,
+            controls: 0,
+            disablekb: 1,
+            fs: 0,
+            modestbranding: 1,
+            rel: 0,
+            origin: location.origin,
+          },
+          events: {
+            onReady: () => {
+              ytReady = true;
+              if (wantPlay && !usingAudio) playYouTube();
+            },
+            onStateChange: (event) => {
+              if (typeof YT === "undefined") return;
+              if (event.data === YT.PlayerState.PLAYING) setPlaying(true);
+              if (event.data === YT.PlayerState.PAUSED) setPlaying(false);
+              if (event.data === YT.PlayerState.ENDED) {
+                player.seekTo(start, true);
+                player.playVideo();
+              }
+            },
+          },
+        });
+      };
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+      if (window.YT && YT.Player) window.onYouTubeIframeAPIReady();
     }
 
     button.addEventListener("click", () => {
-      if (playing) {
-        wantPlay = false;
-        widget?.pause();
-      } else {
-        play();
-      }
+      if (playing) pause();
+      else play();
     });
   };
 

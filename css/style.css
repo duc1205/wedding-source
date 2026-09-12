@@ -1049,34 +1049,48 @@ body.is-locked {
   background: linear-gradient(135deg, #ba4a59, #a23d4b);
 }
 
-.mark-bride .heart-marker,
-.mark-bride .heart-marker::before,
-.mark-bride .heart-marker::after {
-  background: none;
-  box-shadow: none;
-  filter: none;
-}
-
-.mark-bride .heart-marker {
-  width: 30px;
-  height: 28px;
-  transform: none;
-}
-
-.mark-bride .heart-marker::before,
-.mark-bride .heart-marker::after {
-  display: none;
-}
-
-.mark-bride .heart-outline {
+.heart-wrap {
+  position: relative;
   display: block;
-  width: 30px;
-  height: 28px;
-  overflow: visible;
-  fill: #fffaf7;
-  stroke: #ba4a59;
-  stroke-width: 1.85;
-  stroke-linejoin: round;
+  width: 24px;
+  height: 21px;
+}
+
+.mark-bride .heart-outer,
+.mark-bride .heart-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-shadow: none;
+}
+
+.mark-bride .heart-outer,
+.mark-bride .heart-outer::before,
+.mark-bride .heart-outer::after {
+  background: #ba4a59;
+}
+
+.mark-bride .heart-inner,
+.mark-bride .heart-inner::before,
+.mark-bride .heart-inner::after {
+  width: 14px;
+  height: 12px;
+  background: #fffaf7;
+}
+
+.mark-bride .heart-inner {
+  left: 5px;
+  top: 4px;
+}
+
+.mark-bride .heart-inner::before {
+  top: -6px;
+  left: 0;
+}
+
+.mark-bride .heart-inner::after {
+  top: 0;
+  left: 6px;
 }
 
 .mark-bride .heart-day {
@@ -1313,16 +1327,16 @@ body.is-locked {
 }
 
 /* ========== Music + hearts ========== */
-.sc-player {
+.yt-player {
   position: fixed;
   left: 0;
   bottom: 0;
   z-index: 0;
-  width: 240px;
-  height: 120px;
-  opacity: 0.001;
+  width: 200px;
+  height: 80px;
+  opacity: 0.02;
   pointer-events: none;
-  border: 0;
+  overflow: hidden;
 }
 
 .music-btn {
@@ -1668,10 +1682,29 @@ body.is-locked {
     font-size: 11px;
   }
 
-  .mark-bride .heart-marker,
-  .mark-bride .heart-outline {
-    width: 28px;
-    height: 26px;
+  .heart-wrap {
+    width: 22px;
+    height: 19px;
+  }
+
+  .mark-bride .heart-inner,
+  .mark-bride .heart-inner::before,
+  .mark-bride .heart-inner::after {
+    width: 12px;
+    height: 11px;
+  }
+
+  .mark-bride .heart-inner {
+    left: 5px;
+    top: 4px;
+  }
+
+  .mark-bride .heart-inner::before {
+    top: -5px;
+  }
+
+  .mark-bride .heart-inner::after {
+    left: 5px;
   }
 }
 

@@ -89,8 +89,7 @@ window.WEDDING = {
   },
 
   music: {
-    file: "",
-    trackId: "617343069",
+    file: "assets/music/wedding.mp3",
     title: "Cưới Nhau Đi (Yes I Do)",
     startSeconds: 33,
   },

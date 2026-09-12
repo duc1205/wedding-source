@@ -6,4 +6,5 @@ _vuquy.png
 _ref/
 _ref.html
 assets/music/*.mp3
+!assets/music/wedding.mp3
 !assets/music/.gitkeep

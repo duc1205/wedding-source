@@ -72,11 +72,8 @@
       const isBride = day === brideDay;
       const isGroom = day === groomDay;
       if (isBride || isGroom) {
-        const path = "M12 21s-6.7-4.35-9.33-8.2C.7 9.96 1.56 6.5 4.4 5.2c1.86-.85 4.05-.2 5.2 1.46C10.75 5 12.94 4.35 14.8 5.2c2.84 1.3 3.7 4.76 1.73 7.6C18.7 16.65 12 21 12 21z";
-        const heart = isBride
-          ? `<svg class="cal-heart" viewBox="0 0 24 24" aria-hidden="true"><path class="cal-heart-border" d="${path}"/><path class="cal-heart-hole" d="${path}" transform="translate(12 12.6) scale(0.72) translate(-12 -12.6)"/></svg>`
-          : `<svg class="cal-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"/></svg>`;
-        html += `<div class="calendar-cell ${isBride ? "mark-bride" : "mark-groom"}">${heart}<span class="heart-day">${day}</span></div>`;
+        const path = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+        html += `<div class="calendar-cell ${isBride ? "mark-bride" : "mark-groom"}"><svg class="cal-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"/></svg><span class="heart-day">${day}</span></div>`;
       } else {
         html += `<div class="calendar-cell"><span class="day-number">${day}</span></div>`;
       }
@@ -225,11 +222,13 @@
       heart?.classList.add("is-breaking");
       ring?.classList.add("is-active");
       shell?.classList.add("is-exiting");
-      window.playWeddingMusic?.();
       setTimeout(() => closeCover(true), 420);
     };
 
-    button.addEventListener("click", () => closeCover(false));
+    button.addEventListener("click", () => {
+      window.playWeddingMusic?.();
+      closeCover(false);
+    });
     if (new URLSearchParams(location.search).has("open")) closeCover(true);
   };
 
@@ -271,101 +270,38 @@
   const setupMusic = () => {
     const button = document.getElementById("music-btn");
     const audio = document.getElementById("wedding-audio");
-    if (!button) return;
+    if (!button || !audio) return;
 
     const start = Number(W.music?.startSeconds) || 0;
-    const file = W.music?.file;
-    const trackId = W.music?.trackId || "617343069";
-    let widget = null;
-    let playing = false;
-    let wantPlay = false;
-    let usingAudio = false;
+    if (W.music?.file) audio.src = W.music.file;
 
     const setPlaying = (on) => {
-      playing = on;
       button.classList.toggle("is-paused", !on);
     };
 
-    const ensureWidgetApi = (onReady) => {
-      if (typeof SC !== "undefined") {
-        onReady();
-        return;
-      }
-      const existing = document.querySelector("script[data-sc-api]");
-      if (existing) {
-        existing.addEventListener("load", onReady, { once: true });
-        return;
-      }
-      const script = document.createElement("script");
-      script.src = "https://w.soundcloud.com/player/api.js";
-      script.dataset.scApi = "true";
-      script.onload = onReady;
-      document.head.appendChild(script);
-    };
-
-    const bindFrame = (iframe) => {
-      ensureWidgetApi(() => {
-        if (typeof SC === "undefined") return;
-        widget = SC.Widget(iframe);
-        widget.bind(SC.Widget.Events.READY, () => {
-          if (start > 0) widget.seekTo(start * 1000);
-          widget.bind(SC.Widget.Events.PLAY, () => setPlaying(true));
-          widget.bind(SC.Widget.Events.PAUSE, () => setPlaying(false));
-          widget.bind(SC.Widget.Events.FINISH, () => {
-            widget.seekTo(start * 1000);
-            widget.play();
-          });
-        });
-      });
-    };
-
-    const playStream = () => {
-      let iframe = document.getElementById("music-frame");
-      if (!iframe) {
-        iframe = document.createElement("iframe");
-        iframe.id = "music-frame";
-        iframe.title = W.music?.title || "Nhạc cưới";
-        iframe.setAttribute("allow", "autoplay; encrypted-media");
-        iframe.setAttribute("allowfullscreen", "true");
-        document.body.appendChild(iframe);
-        iframe.addEventListener("load", () => bindFrame(iframe));
-      }
-      iframe.src =
-        `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${trackId}` +
-        `&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false`;
-      setPlaying(true);
-    };
-
     const play = () => {
-      wantPlay = true;
-      if (file && audio) {
-        usingAudio = true;
-        audio.src = file;
-        audio.loop = true;
-        audio.currentTime = start;
-        const result = audio.play();
-        if (result && typeof result.catch === "function") {
-          result.then(() => setPlaying(true)).catch(() => {
-            usingAudio = false;
-            playStream();
-          });
-        }
-        return;
+      const kick = audio.play();
+      if (kick && typeof kick.then === "function") {
+        kick
+          .then(() => {
+            if (start > 0) audio.currentTime = start;
+            setPlaying(true);
+          })
+          .catch(() => setPlaying(false));
       }
-      playStream();
     };
 
-    const pause = () => {
-      wantPlay = false;
-      if (usingAudio && audio) audio.pause();
-      widget?.pause();
-      setPlaying(false);
-    };
+    audio.addEventListener("playing", () => setPlaying(true));
+    audio.addEventListener("pause", () => setPlaying(false));
+    audio.addEventListener("ended", () => {
+      audio.currentTime = start;
+      audio.play();
+    });
 
     window.playWeddingMusic = play;
     button.addEventListener("click", () => {
-      if (playing) pause();
-      else play();
+      if (audio.paused) play();
+      else audio.pause();
     });
   };
 

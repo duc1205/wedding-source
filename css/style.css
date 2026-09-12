@@ -990,7 +990,7 @@ body.is-locked {
 .calendar-cell {
   display: grid;
   place-items: center;
-  min-height: 42px;
+  min-height: 40px;
 }
 
 .day-number {
@@ -1005,21 +1005,19 @@ body.is-locked {
 
 .cal-heart {
   display: block;
-  width: 36px;
+  width: 32px;
   height: 32px;
-  overflow: visible;
 }
 
 .mark-groom .cal-heart {
   fill: #ba4a59;
 }
 
-.mark-bride .cal-heart-border {
-  fill: #ba4a59;
-}
-
-.mark-bride .cal-heart-hole {
+.mark-bride .cal-heart {
   fill: #fffaf7;
+  stroke: #ba4a59;
+  stroke-width: 1.7;
+  stroke-linejoin: round;
 }
 
 .heart-day {
@@ -1029,8 +1027,8 @@ body.is-locked {
   display: grid;
   place-items: center;
   color: #fff;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   pointer-events: none;
 }
 
@@ -1268,18 +1266,6 @@ body.is-locked {
 }
 
 /* ========== Music + hearts ========== */
-#music-frame {
-  position: fixed;
-  left: -400px;
-  bottom: 0;
-  z-index: 0;
-  width: 320px;
-  height: 180px;
-  opacity: 0;
-  pointer-events: none;
-  border: 0;
-}
-
 .music-btn {
   position: fixed;
   right: calc(10px + env(safe-area-inset-right, 0px));
@@ -1617,7 +1603,7 @@ body.is-locked {
   }
 
   .cal-heart {
-    width: 34px;
+    width: 30px;
     height: 30px;
   }
 }

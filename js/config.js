@@ -63,13 +63,13 @@ window.WEDDING = {
   },
 
   images: {
-    hero: "assets/images/9.jpg",
-    heroMobile: "assets/images/9.jpg",
+    hero: "assets/images/1.jpg",
+    heroMobile: "assets/images/1.jpg",
     groom: "assets/images/6.jpg",
     bride: "assets/images/5.jpg",
     couple: "assets/images/2.jpg",
-    bgQuote: "assets/images/5.jpg",
-    bgQuote1: "assets/images/6.jpg",
+    bgQuote: "assets/images/11.jpg",
+    bgQuote1: "assets/images/7.jpg",
     thankYou: "assets/images/9.jpg",
     thankYouMobile: "assets/images/9.jpg",
     album: [
@@ -79,7 +79,14 @@ window.WEDDING = {
       "assets/images/4.jpg",
       "assets/images/5.jpg",
       "assets/images/6.jpg",
+      "assets/images/7.jpg",
+      "assets/images/8.jpg",
       "assets/images/9.jpg",
+      "assets/images/10.jpg",
+      "assets/images/11.jpg",
+      "assets/images/12.jpg",
+      "assets/images/13.jpg",
+      "assets/images/14.jpg",
     ],
   },
 

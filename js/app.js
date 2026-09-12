@@ -190,6 +190,16 @@
     if (collage) io.observe(collage);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
+
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  scrollToTop();
+  window.addEventListener("pageshow", scrollToTop);
+
   const setupCover = () => {
     const root = document.getElementById("cover");
     const shell = document.getElementById("cover-shell");
@@ -199,11 +209,14 @@
     if (!button) return;
 
     const closeCover = (instant = false) => {
+      scrollToTop();
       if (instant) {
         root?.classList.add("is-gone");
         root?.setAttribute("aria-hidden", "true");
         document.body.classList.remove("is-locked");
         if (root) root.style.display = "none";
+        scrollToTop();
+        requestAnimationFrame(scrollToTop);
         return;
       }
       heart?.classList.add("is-breaking");

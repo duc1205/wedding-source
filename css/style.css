@@ -56,7 +56,13 @@ a {
   display: none !important;
 }
 
+html:has(body.is-locked) {
+  height: 100%;
+  overflow: hidden;
+}
+
 body.is-locked {
+  height: 100%;
   overflow: hidden;
 }
 

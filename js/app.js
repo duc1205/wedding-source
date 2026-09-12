@@ -73,7 +73,7 @@
       const isGroom = day === groomDay;
       if (isBride || isGroom) {
         const mark = isBride && isGroom ? "mark-groom" : isBride ? "mark-bride" : "mark-groom";
-        html += `<div class="calendar-cell ${mark}"><span class="heart-marker"><span class="heart-day">${day}</span></span></div>`;
+        html += `<div class="calendar-cell ${mark}"><span class="heart-marker"></span><span class="heart-day">${day}</span></div>`;
       } else {
         html += `<div class="calendar-cell"><span class="day-number">${day}</span></div>`;
       }

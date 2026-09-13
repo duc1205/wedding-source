@@ -30,7 +30,7 @@ window.WEDDING = {
     brideAddress: "Xóm Xuân Tường - xã Xuân Lâm - tỉnh Nghệ An",
   },
 
-  inviteLead: "Tới dự lễ Vu quy và lễ Thành hôn của con chúng tôi",
+  inviteLead: "Tới dự lễ Vu quy và lễ Thành hôn của chúng tôi",
 
   /* Lễ vu quy — tư gia nhà gái */
   brideCeremony: {
@@ -93,5 +93,4 @@ window.WEDDING = {
     title: "Cưới Nhau Đi (Yes I Do)",
     startSeconds: 33,
   },
-
 };

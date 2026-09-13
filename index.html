@@ -1,291 +1,437 @@
 <!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#ba4a59" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Minh Đức - Phan Giang</title>
-  <meta name="description" content="Thiệp cưới Minh Đức và Phan Giang — trân trọng mời bạn chung vui trong ngày trọng đại." />
-  <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="css/style.css" />
-  <script>
-    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-    window.scrollTo(0, 0);
-  </script>
-</head>
-<body class="is-locked">
-  <div id="cover" class="cover-root" aria-hidden="false">
-    <div class="cover-bg-petals" id="cover-petals"></div>
-    <div class="cover-shell" id="cover-shell">
-      <div class="cover-card">
-        <div class="cover-surface"></div>
-        <img class="cover-flower cover-flower-top-left" src="assets/svg/flower-corner.svg" alt="" />
-        <img class="cover-flower cover-flower-top-right" src="assets/svg/flower-corner.svg" alt="" />
-        <img class="cover-flower cover-flower-bottom" src="assets/svg/flower-bottom.svg" alt="" />
-        <div class="cover-seal-ring" id="cover-ring"></div>
-        <div class="cover-top-heart" id="cover-heart">
-          <svg class="cover-top-heart-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 21s-6.7-4.35-9.33-8.2C.7 9.96 1.56 6.5 4.4 5.2c1.86-.85 4.05-.2 5.2 1.46C10.75 5 12.94 4.35 14.8 5.2c2.84 1.3 3.7 4.76 1.73 7.6C18.7 16.65 12 21 12 21z"/>
-          </svg>
-        </div>
-        <div class="cover-content">
-          <h1 class="cover-title">
-            <span data-bind="couple.groomShort">Minh Đức</span>
-            <span class="amp">&amp;</span>
-            <span data-bind="couple.brideShort">Phan Giang</span>
-          </h1>
-          <div class="cover-divider">
-            <span class="cover-divider-line cover-divider-line-left"></span>
-            <span class="cover-divider-icon">✦</span>
-            <span class="cover-divider-line cover-divider-line-right"></span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#ba4a59" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <title>Minh Đức - Phan Giang</title>
+    <meta
+      name="description"
+      content="Thiệp cưới Minh Đức và Phan Giang — trân trọng mời bạn chung vui trong ngày trọng đại."
+    />
+    <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/style.css" />
+    <script>
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      window.scrollTo(0, 0);
+    </script>
+  </head>
+  <body class="is-locked">
+    <div id="cover" class="cover-root" aria-hidden="false">
+      <div class="cover-bg-petals" id="cover-petals"></div>
+      <div class="cover-shell" id="cover-shell">
+        <div class="cover-card">
+          <div class="cover-surface"></div>
+          <img
+            class="cover-flower cover-flower-top-left"
+            src="assets/svg/flower-corner.svg"
+            alt=""
+          />
+          <img
+            class="cover-flower cover-flower-top-right"
+            src="assets/svg/flower-corner.svg"
+            alt=""
+          />
+          <img
+            class="cover-flower cover-flower-bottom"
+            src="assets/svg/flower-bottom.svg"
+            alt=""
+          />
+          <div class="cover-seal-ring" id="cover-ring"></div>
+          <div class="cover-top-heart" id="cover-heart">
+            <svg
+              class="cover-top-heart-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 21s-6.7-4.35-9.33-8.2C.7 9.96 1.56 6.5 4.4 5.2c1.86-.85 4.05-.2 5.2 1.46C10.75 5 12.94 4.35 14.8 5.2c2.84 1.3 3.7 4.76 1.73 7.6C18.7 16.65 12 21 12 21z"
+              />
+            </svg>
           </div>
-          <div class="cover-date-wrap" data-bind="date.text">20 tháng 09, 2026</div>
-          <p class="cover-sub">Thân Mời</p>
-          <button class="cover-open-btn" id="open-invite" type="button">
-            <span class="cover-open-btn-label">Mở thiệp</span>
-            <span class="cover-open-btn-shine" aria-hidden="true"></span>
-          </button>
+          <div class="cover-content">
+            <h1 class="cover-title">
+              <span data-bind="couple.groomShort">Minh Đức</span>
+              <span class="amp">&amp;</span>
+              <span data-bind="couple.brideShort">Phan Giang</span>
+            </h1>
+            <div class="cover-divider">
+              <span class="cover-divider-line cover-divider-line-left"></span>
+              <span class="cover-divider-icon">✦</span>
+              <span class="cover-divider-line cover-divider-line-right"></span>
+            </div>
+            <div class="cover-date-wrap" data-bind="date.text">
+              20 tháng 09, 2026
+            </div>
+            <p class="cover-sub">Thân Mời</p>
+            <button class="cover-open-btn" id="open-invite" type="button">
+              <span class="cover-open-btn-label">Mở thiệp</span>
+              <span class="cover-open-btn-shine" aria-hidden="true"></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <main id="app">
-    <section class="hero-cover">
-      <div class="cover">
-        <img class="hero-photo" id="hero-bg" alt="Minh Đức và Phan Giang" />
-        <div class="hero-overlay"></div>
-        <div class="container">
-          <div class="display-tc">
-            <h1 class="hero-title">Save the date</h1>
-            <div class="banner-text">
-              <div class="banner-couple">
-                <span class="banner-name banner-name--bride" data-bind="couple.brideShort">Phan Giang</span>
-                <span class="banner-heart"><i>♥</i></span>
-                <span class="banner-name banner-name--groom" data-bind="couple.groomShort">Minh Đức</span>
+    <main id="app">
+      <section class="hero-cover">
+        <div class="cover">
+          <img class="hero-photo" id="hero-bg" alt="Minh Đức và Phan Giang" />
+          <div class="hero-overlay"></div>
+          <div class="container">
+            <div class="display-tc">
+              <h1 class="hero-title">Save the date</h1>
+              <div class="banner-text">
+                <div class="banner-couple">
+                  <span
+                    class="banner-name banner-name--bride"
+                    data-bind="couple.brideShort"
+                    >Phan Giang</span
+                  >
+                  <span class="banner-heart"><i>♥</i></span>
+                  <span
+                    class="banner-name banner-name--groom"
+                    data-bind="couple.groomShort"
+                    >Minh Đức</span
+                  >
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="couple-collage-section">
-      <div class="intro-block reveal">
-        <h2 class="section-heading">XIN CHÀO!</h2>
-        <p>Trân trọng kính mời bạn đến chung vui cùng chúng mình trong ngày trọng đại của cuộc đời.</p>
-      </div>
-      <div class="couple-collage-shell">
-        <div class="couple-collage-grid" id="collage">
-          <div class="name-block name-block-left">
-            <p class="name-script" data-bind="couple.groomShort">Minh Đức</p>
-          </div>
-          <figure class="collage-card collage-left">
-            <img data-src="images.groom" alt="Chú rể Minh Đức" />
-          </figure>
-          <figure class="collage-card collage-center">
-            <img data-src="images.couple" alt="Minh Đức và Phan Giang" />
-          </figure>
-          <figure class="collage-card collage-right">
-            <img data-src="images.bride" alt="Cô dâu Phan Giang" />
-          </figure>
-          <div class="name-block name-block-right">
-            <p class="name-script" data-bind="couple.brideShort">Phan Giang</p>
-          </div>
-        </div>
-      </div>
-      <div class="couple-floral-border reveal"></div>
-    </section>
-
-    <section class="wedding-info">
-      <div class="card-paper wedding-info-reveal reveal">
-        <div class="family-grid">
-          <div class="family-col groom-side">
-            <p class="family-side-vi">NHÀ TRAI</p>
-            <p class="family-side-en">Groom's family</p>
-            <p class="family-line">
-              <span class="family-label">Ông</span>
-              <span class="family-name" data-bind="family.groomParents.0"></span>
-            </p>
-            <p class="family-line">
-              <span class="family-label">Bà</span>
-              <span class="family-name" data-bind="family.groomParents.1"></span>
-            </p>
-            <p class="family-address" data-bind="family.groomAddress"></p>
-          </div>
-          <div class="family-col bride-side">
-            <p class="family-side-vi">NHÀ GÁI</p>
-            <p class="family-side-en">Bride's family</p>
-            <p class="family-line">
-              <span class="family-label">Ông</span>
-              <span class="family-name" data-bind="family.brideParents.0"></span>
-            </p>
-            <p class="family-line">
-              <span class="family-label">Bà</span>
-              <span class="family-name" data-bind="family.brideParents.1"></span>
-            </p>
-            <p class="family-address" data-bind="family.brideAddress"></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="invite-block reveal-block reveal">
-        <p class="invite-kicker">TRÂN TRỌNG KÍNH MỜI</p>
-        <p class="invite-audience">Bạn bè cùng gia đình</p>
-        <p class="invite-lead" data-bind="inviteLead">Tới dự lễ Vu quy và lễ Thành hôn của con chúng tôi</p>
-        <div class="invite-names">
-          <p class="invite-fullname" data-bind="couple.groomFull">Minh Đức</p>
-          <p class="invite-role" data-bind="couple.groomRole">Trưởng Nam</p>
-          <p class="invite-amp">&amp;</p>
-          <p class="invite-fullname" data-bind="couple.brideFull">Phan Giang</p>
-          <p class="invite-role" data-bind="couple.brideRole">Trưởng Nữ</p>
-        </div>
-
-        <article class="ceremony-card" id="bride-ceremony-card">
-          <p class="ceremony-kicker">LỄ VU QUY ĐƯỢC CỬ HÀNH TẠI</p>
-          <p class="ceremony-place" data-bind="brideCeremony.restaurant"></p>
-          <p class="ceremony-when">VÀO LÚC</p>
-          <p class="ceremony-time" data-bind="brideCeremony.receptionTime"></p>
-          <p class="ceremony-date">
-            <span data-bind="brideCeremony.weekday"></span>
-            <span> | </span>
-            <span data-bind="brideCeremony.day"></span>
-            <span> | </span>
-            <span data-bind="brideCeremony.month"></span>
+      <section class="couple-collage-section">
+        <div class="intro-block reveal">
+          <h2 class="section-heading">XIN CHÀO!</h2>
+          <p>
+            Trân trọng kính mời bạn đến chung vui cùng chúng mình trong ngày
+            trọng đại của cuộc đời.
           </p>
-          <p class="ceremony-year" data-bind="brideCeremony.year"></p>
-          <p class="ceremony-lunar" data-bind="brideCeremony.lunar"></p>
-          <p class="ceremony-address" data-bind="brideCeremony.restaurantAddress"></p>
-          <a class="ceremony-map" data-href="brideCeremony.restaurantMapLink" target="_blank" rel="noopener">Chỉ đường</a>
-        </article>
-
-        <article class="ceremony-card">
-          <p class="ceremony-kicker">LỄ THÀNH HÔN ĐƯỢC CỬ HÀNH TẠI</p>
-          <p class="ceremony-place" data-bind="weddingCeremony.restaurant"></p>
-          <p class="ceremony-when">VÀO LÚC</p>
-          <p class="ceremony-time" data-bind="weddingCeremony.receptionTime"></p>
-          <p class="ceremony-date">
-            <span data-bind="weddingCeremony.weekday"></span>
-            <span> | </span>
-            <span data-bind="weddingCeremony.day"></span>
-            <span> | </span>
-            <span data-bind="weddingCeremony.month"></span>
-          </p>
-          <p class="ceremony-year" data-bind="weddingCeremony.year"></p>
-          <p class="ceremony-lunar" data-bind="weddingCeremony.lunar"></p>
-          <p class="ceremony-address" data-bind="weddingCeremony.restaurantAddress"></p>
-          <a class="ceremony-map" data-href="weddingCeremony.restaurantMapLink" target="_blank" rel="noopener">Chỉ đường</a>
-        </article>
-      </div>
-    </section>
-
-    <section class="quote-stage reveal" id="quote-stage">
-      <div class="quote-photo-wrap">
-        <img class="quote-photo" id="quote-stage-img" alt="Minh Đức và Phan Giang" />
-        <div class="quote-shade"></div>
-        <div class="quote-copy">
-          <p class="quote-script">Two hearts</p>
-          <p class="quote-serif">one future</p>
         </div>
-      </div>
-    </section>
+        <div class="couple-collage-shell">
+          <div class="couple-collage-grid" id="collage">
+            <div class="name-block name-block-left">
+              <p class="name-script" data-bind="couple.groomShort">Minh Đức</p>
+            </div>
+            <figure class="collage-card collage-left">
+              <img data-src="images.groom" alt="Chú rể Minh Đức" />
+            </figure>
+            <figure class="collage-card collage-center">
+              <img data-src="images.couple" alt="Minh Đức và Phan Giang" />
+            </figure>
+            <figure class="collage-card collage-right">
+              <img data-src="images.bride" alt="Cô dâu Phan Giang" />
+            </figure>
+            <div class="name-block name-block-right">
+              <p class="name-script" data-bind="couple.brideShort">
+                Phan Giang
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="couple-floral-border reveal"></div>
+      </section>
 
-    <section class="quote-section-reveal reveal">
-      <div class="quote-bg" id="quote-bg">
+      <section class="wedding-info">
+        <div class="card-paper wedding-info-reveal reveal">
+          <div class="family-grid">
+            <div class="family-col groom-side">
+              <p class="family-side-vi">NHÀ TRAI</p>
+              <p class="family-side-en">Groom's family</p>
+              <p class="family-line">
+                <span class="family-label">Ông</span>
+                <span
+                  class="family-name"
+                  data-bind="family.groomParents.0"
+                ></span>
+              </p>
+              <p class="family-line">
+                <span class="family-label">Bà</span>
+                <span
+                  class="family-name"
+                  data-bind="family.groomParents.1"
+                ></span>
+              </p>
+              <p class="family-address" data-bind="family.groomAddress"></p>
+            </div>
+            <div class="family-col bride-side">
+              <p class="family-side-vi">NHÀ GÁI</p>
+              <p class="family-side-en">Bride's family</p>
+              <p class="family-line">
+                <span class="family-label">Ông</span>
+                <span
+                  class="family-name"
+                  data-bind="family.brideParents.0"
+                ></span>
+              </p>
+              <p class="family-line">
+                <span class="family-label">Bà</span>
+                <span
+                  class="family-name"
+                  data-bind="family.brideParents.1"
+                ></span>
+              </p>
+              <p class="family-address" data-bind="family.brideAddress"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="invite-block reveal-block reveal">
+          <p class="invite-kicker">TRÂN TRỌNG KÍNH MỜI</p>
+          <p class="invite-audience">Bạn bè cùng gia đình</p>
+          <p class="invite-lead" data-bind="inviteLead">
+            Tới dự lễ Vu quy và lễ Thành hôn của chúng tôi
+          </p>
+          <div class="invite-names">
+            <p class="invite-fullname" data-bind="couple.groomFull">Minh Đức</p>
+            <p class="invite-role" data-bind="couple.groomRole">Trưởng Nam</p>
+            <p class="invite-amp">&amp;</p>
+            <p class="invite-fullname" data-bind="couple.brideFull">
+              Phan Giang
+            </p>
+            <p class="invite-role" data-bind="couple.brideRole">Trưởng Nữ</p>
+          </div>
+
+          <article class="ceremony-card" id="bride-ceremony-card">
+            <p class="ceremony-kicker">LỄ VU QUY ĐƯỢC CỬ HÀNH TẠI</p>
+            <p class="ceremony-place" data-bind="brideCeremony.restaurant"></p>
+            <p class="ceremony-when">VÀO LÚC</p>
+            <p
+              class="ceremony-time"
+              data-bind="brideCeremony.receptionTime"
+            ></p>
+            <p class="ceremony-date">
+              <span data-bind="brideCeremony.weekday"></span>
+              <span> | </span>
+              <span data-bind="brideCeremony.day"></span>
+              <span> | </span>
+              <span data-bind="brideCeremony.month"></span>
+            </p>
+            <p class="ceremony-year" data-bind="brideCeremony.year"></p>
+            <p class="ceremony-lunar" data-bind="brideCeremony.lunar"></p>
+            <p
+              class="ceremony-address"
+              data-bind="brideCeremony.restaurantAddress"
+            ></p>
+            <a
+              class="ceremony-map"
+              data-href="brideCeremony.restaurantMapLink"
+              target="_blank"
+              rel="noopener"
+              >Chỉ đường</a
+            >
+          </article>
+
+          <article class="ceremony-card">
+            <p class="ceremony-kicker">LỄ THÀNH HÔN ĐƯỢC CỬ HÀNH TẠI</p>
+            <p
+              class="ceremony-place"
+              data-bind="weddingCeremony.restaurant"
+            ></p>
+            <p class="ceremony-when">VÀO LÚC</p>
+            <p
+              class="ceremony-time"
+              data-bind="weddingCeremony.receptionTime"
+            ></p>
+            <p class="ceremony-date">
+              <span data-bind="weddingCeremony.weekday"></span>
+              <span> | </span>
+              <span data-bind="weddingCeremony.day"></span>
+              <span> | </span>
+              <span data-bind="weddingCeremony.month"></span>
+            </p>
+            <p class="ceremony-year" data-bind="weddingCeremony.year"></p>
+            <p class="ceremony-lunar" data-bind="weddingCeremony.lunar"></p>
+            <p
+              class="ceremony-address"
+              data-bind="weddingCeremony.restaurantAddress"
+            ></p>
+            <a
+              class="ceremony-map"
+              data-href="weddingCeremony.restaurantMapLink"
+              target="_blank"
+              rel="noopener"
+              >Chỉ đường</a
+            >
+          </article>
+        </div>
+      </section>
+
+      <section class="quote-stage reveal" id="quote-stage">
         <div class="quote-photo-wrap">
-          <img class="quote-photo" id="quote-bg-img" alt="Minh Đức và Phan Giang" />
-          <div class="quote-overlay"></div>
-          <div class="quote-content">
-            <p class="quote-mark">“</p>
-            <p class="quote-text">
-              Yêu thương không chỉ là cùng nhau đi qua những ngày đẹp trời, mà còn là nắm tay nhau thật chặt qua cả những ngày giông gió. Và hôm nay, chúng mình chọn về chung một nhà để cùng viết tiếp hành trình ấy.
-            </p>
+          <img
+            class="quote-photo"
+            id="quote-stage-img"
+            alt="Minh Đức và Phan Giang"
+          />
+          <div class="quote-shade"></div>
+          <div class="quote-copy">
+            <p class="quote-script">Two hearts</p>
+            <p class="quote-serif">one future</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="countdown-wrap">
-      <div class="countdown-card countdown-reveal reveal">
-        <h2 class="section-heading">CÙNG ĐẾM NGƯỢC</h2>
-        <h2 class="section-heading" id="countdown-date"></h2>
-        <p class="countdown-sub" id="countdown-caption">CÒN LẠI ĐẾN LỄ THÀNH HÔN.</p>
-        <div class="count-grid">
-          <div class="count-box"><div class="count-num" id="cd-days">0</div><div class="count-label">Ngày</div></div>
-          <div class="count-box"><div class="count-num" id="cd-hours">0</div><div class="count-label">Giờ</div></div>
-          <div class="count-box"><div class="count-num" id="cd-mins">0</div><div class="count-label">Phút</div></div>
-          <div class="count-box"><div class="count-num" id="cd-secs">0</div><div class="count-label">Giây</div></div>
-        </div>
-      </div>
-      <img class="countdown-flower-border" src="assets/svg/flower-border.svg" alt="" />
-    </section>
-
-    <section class="calendar-section reveal">
-      <div class="calendar-card">
-        <div class="calendar-block">
-          <p class="calendar-month" id="calendar-month"></p>
-          <div class="weekday-row">
-            <span class="weekday-item">MON</span>
-            <span class="weekday-item">TUE</span>
-            <span class="weekday-item">WED</span>
-            <span class="weekday-item">THU</span>
-            <span class="weekday-item">FRI</span>
-            <span class="weekday-item">SAT</span>
-            <span class="weekday-item">SUN</span>
+      <section class="quote-section-reveal reveal">
+        <div class="quote-bg" id="quote-bg">
+          <div class="quote-photo-wrap">
+            <img
+              class="quote-photo"
+              id="quote-bg-img"
+              alt="Minh Đức và Phan Giang"
+            />
+            <div class="quote-overlay"></div>
+            <div class="quote-content">
+              <p class="quote-mark">“</p>
+              <p class="quote-text">
+                Yêu thương không chỉ là cùng nhau đi qua những ngày đẹp trời, mà
+                còn là nắm tay nhau thật chặt qua cả những ngày giông gió. Và
+                hôm nay, chúng mình chọn về chung một nhà để cùng viết tiếp hành
+                trình ấy.
+              </p>
+            </div>
           </div>
-          <div class="calendar-grid" id="calendar-grid"></div>
         </div>
-        <div class="calendar-legend">
-          <p class="legend-item" id="legend-bride"><span class="legend-dot legend-bride"></span> Lễ vu quy</p>
-          <p class="legend-item"><span class="legend-dot legend-groom"></span> Lễ thành hôn</p>
+      </section>
+
+      <section class="countdown-wrap">
+        <div class="countdown-card countdown-reveal reveal">
+          <h2 class="section-heading">CÙNG ĐẾM NGƯỢC</h2>
+          <h2 class="section-heading" id="countdown-date"></h2>
+          <p class="countdown-sub" id="countdown-caption">
+            CÒN LẠI ĐẾN LỄ THÀNH HÔN.
+          </p>
+          <div class="count-grid">
+            <div class="count-box">
+              <div class="count-num" id="cd-days">0</div>
+              <div class="count-label">Ngày</div>
+            </div>
+            <div class="count-box">
+              <div class="count-num" id="cd-hours">0</div>
+              <div class="count-label">Giờ</div>
+            </div>
+            <div class="count-box">
+              <div class="count-num" id="cd-mins">0</div>
+              <div class="count-label">Phút</div>
+            </div>
+            <div class="count-box">
+              <div class="count-num" id="cd-secs">0</div>
+              <div class="count-label">Giây</div>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+        <img
+          class="countdown-flower-border"
+          src="assets/svg/flower-border.svg"
+          alt=""
+        />
+      </section>
 
-    <section class="album-section reveal">
-      <h2 class="section-heading">ALBUM</h2>
-      <div class="album-slider">
-        <div class="album-stage">
-          <img class="album-stage-image" id="album-image" alt="Ảnh cưới" />
-          <button class="slider-nav left" id="album-prev" type="button" aria-label="Ảnh trước">‹</button>
-          <button class="slider-nav right" id="album-next" type="button" aria-label="Ảnh sau">›</button>
-          <div class="slide-counter" id="album-counter">1 / 12</div>
+      <section class="calendar-section reveal">
+        <div class="calendar-card">
+          <div class="calendar-block">
+            <p class="calendar-month" id="calendar-month"></p>
+            <div class="weekday-row">
+              <span class="weekday-item">MON</span>
+              <span class="weekday-item">TUE</span>
+              <span class="weekday-item">WED</span>
+              <span class="weekday-item">THU</span>
+              <span class="weekday-item">FRI</span>
+              <span class="weekday-item">SAT</span>
+              <span class="weekday-item">SUN</span>
+            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
+          </div>
+          <div class="calendar-legend">
+            <p class="legend-item mark-bride" id="legend-bride">Lễ vu quy</p>
+            <p class="legend-item mark-groom" id="legend-groom">Lễ thành hôn</p>
+          </div>
         </div>
-        <div class="album-thumbs" id="album-thumbs"></div>
-      </div>
-    </section>
+      </section>
 
-    <section class="banner_bottom" id="thank-you">
-      <div class="quote-photo-wrap">
-        <img class="quote-photo" id="thank-you-img" alt="Minh Đức và Phan Giang" />
-        <div class="quote-shade"></div>
-        <div class="container">
-          <h2>Thank you</h2>
-          <svg class="heart" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 21s-6.7-4.35-9.33-8.2C.7 9.96 1.56 6.5 4.4 5.2c1.86-.85 4.05-.2 5.2 1.46C10.75 5 12.94 4.35 14.8 5.2c2.84 1.3 3.7 4.76 1.73 7.6C18.7 16.65 12 21 12 21z"/>
-          </svg>
+      <section class="album-section reveal">
+        <h2 class="section-heading">ALBUM</h2>
+        <div class="album-slider">
+          <div class="album-stage">
+            <img class="album-stage-image" id="album-image" alt="Ảnh cưới" />
+            <button
+              class="slider-nav left"
+              id="album-prev"
+              type="button"
+              aria-label="Ảnh trước"
+            >
+              ‹
+            </button>
+            <button
+              class="slider-nav right"
+              id="album-next"
+              type="button"
+              aria-label="Ảnh sau"
+            >
+              ›
+            </button>
+            <div class="slide-counter" id="album-counter">1 / 12</div>
+          </div>
+          <div class="album-thumbs" id="album-thumbs"></div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <div id="floating-hearts"></div>
+      <section class="banner_bottom" id="thank-you">
+        <div class="quote-photo-wrap">
+          <img
+            class="quote-photo"
+            id="thank-you-img"
+            alt="Minh Đức và Phan Giang"
+          />
+          <div class="quote-shade"></div>
+          <div class="container">
+            <h2>Thank you</h2>
+            <svg class="heart" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 21s-6.7-4.35-9.33-8.2C.7 9.96 1.56 6.5 4.4 5.2c1.86-.85 4.05-.2 5.2 1.46C10.75 5 12.94 4.35 14.8 5.2c2.84 1.3 3.7 4.76 1.73 7.6C18.7 16.65 12 21 12 21z"
+              />
+            </svg>
+          </div>
+        </div>
+      </section>
+    </main>
 
-  <button class="music-btn is-paused" id="music-btn" type="button" aria-label="Bật / tắt nhạc">
-    <span class="music-eq" aria-hidden="true">
-      <span class="music-eq-bar"></span>
-      <span class="music-eq-bar"></span>
-      <span class="music-eq-bar"></span>
-      <span class="music-eq-bar"></span>
-    </span>
-  </button>
-  <audio id="wedding-audio" src="assets/music/wedding.mp3" preload="auto" playsinline webkit-playsinline></audio>
-  <script src="js/config.js"></script>
-  <script src="js/app.js"></script>
-</body>
+    <div id="floating-hearts"></div>
+
+    <button
+      class="music-btn is-paused"
+      id="music-btn"
+      type="button"
+      aria-label="Bật / tắt nhạc"
+    >
+      <span class="music-eq" aria-hidden="true">
+        <span class="music-eq-bar"></span>
+        <span class="music-eq-bar"></span>
+        <span class="music-eq-bar"></span>
+        <span class="music-eq-bar"></span>
+      </span>
+    </button>
+    <audio
+      id="wedding-audio"
+      src="assets/music/wedding.mp3"
+      preload="auto"
+      playsinline
+      webkit-playsinline
+      type="audio/mpeg"
+    ></audio>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>

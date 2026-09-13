@@ -60,11 +60,24 @@
     const daysInMonth = new Date(year, month, 0).getDate();
     const brideDay = W.brideCeremony?.enabled ? Number(W.brideCeremony.calendarDay) : NaN;
     const groomDay = Number(W.weddingCeremony.calendarDay);
+    const heartPath =
+      "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+    const heartSvg = (outlined) =>
+      `<svg class="cal-heart" viewBox="0 0 24 24" aria-hidden="true"><path class="heart-shell" d="${heartPath}"/>${
+        outlined
+          ? `<path class="heart-core" d="${heartPath}" transform="translate(12 11.15) scale(0.84) translate(-12 -11.15)"/>`
+          : ""
+      }</svg>`;
 
     if (!W.brideCeremony?.enabled) {
       document.getElementById("bride-ceremony-card")?.classList.add("hidden");
       document.getElementById("legend-bride")?.classList.add("hidden");
     }
+
+    const legendBride = document.getElementById("legend-bride");
+    const legendGroom = document.getElementById("legend-groom");
+    if (legendBride) legendBride.innerHTML = `${heartSvg(true)} Lễ vu quy`;
+    if (legendGroom) legendGroom.innerHTML = `${heartSvg(false)} Lễ thành hôn`;
 
     let html = "";
     for (let i = 0; i < startOffset; i += 1) html += `<div class="calendar-cell"></div>`;
@@ -72,8 +85,7 @@
       const isBride = day === brideDay;
       const isGroom = day === groomDay;
       if (isBride || isGroom) {
-        const path = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
-        html += `<div class="calendar-cell ${isBride ? "mark-bride" : "mark-groom"}"><svg class="cal-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"/></svg><span class="heart-day">${day}</span></div>`;
+        html += `<div class="calendar-cell ${isBride ? "mark-bride" : "mark-groom"}"><span class="heart-badge">${heartSvg(isBride)}<span class="heart-day">${day}</span></span></div>`;
       } else {
         html += `<div class="calendar-cell"><span class="day-number">${day}</span></div>`;
       }
@@ -273,10 +285,24 @@
     if (!button || !audio) return;
 
     const start = Number(W.music?.startSeconds) || 0;
-    if (W.music?.file) audio.src = W.music.file;
+    const file = W.music?.file;
+    if (file && audio.getAttribute("src") !== file) audio.src = file;
+    audio.preload = "auto";
+    audio.playsInline = true;
+
+    let jumpToStart = start > 0;
 
     const setPlaying = (on) => {
       button.classList.toggle("is-paused", !on);
+    };
+
+    const seekStart = () => {
+      if (!(start > 0)) return;
+      try {
+        audio.currentTime = start;
+      } catch (err) {
+        /* Safari may reject seek before metadata. */
+      }
     };
 
     const play = () => {
@@ -284,17 +310,26 @@
       if (kick && typeof kick.then === "function") {
         kick
           .then(() => {
-            if (start > 0) audio.currentTime = start;
+            if (jumpToStart) {
+              seekStart();
+              jumpToStart = false;
+            }
             setPlaying(true);
           })
           .catch(() => setPlaying(false));
       }
     };
 
-    audio.addEventListener("playing", () => setPlaying(true));
+    audio.addEventListener("playing", () => {
+      setPlaying(true);
+      if (jumpToStart) {
+        seekStart();
+        jumpToStart = false;
+      }
+    });
     audio.addEventListener("pause", () => setPlaying(false));
     audio.addEventListener("ended", () => {
-      audio.currentTime = start;
+      seekStart();
       audio.play();
     });
 

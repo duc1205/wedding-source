@@ -1256,27 +1256,33 @@ body.is-locked {
 
 .banner_bottom .container {
   position: absolute;
-  left: 50%;
+  inset-inline: 0;
   bottom: 48px;
   z-index: 2;
   display: flex;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   margin: 0;
-  transform: translateX(-50%);
+  padding: 0 16px;
+  transform: none;
 }
 
 .banner_bottom h2 {
   color: #fff;
   margin: 0;
   font-family: "Great Vibes", cursive;
-  font-size: 60px;
+  font-size: clamp(40px, 12vw, 64px);
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .banner_bottom .heart {
-  width: 35px;
-  height: 35px;
+  flex: none;
+  width: 28px;
+  height: 28px;
   fill: #e74c3c;
 }
 
@@ -1649,7 +1655,17 @@ body.is-locked {
   }
 
   .banner_bottom h2 {
-    font-size: clamp(42px, 14vw, 60px);
+    font-size: clamp(38px, 11.5vw, 52px);
+  }
+
+  .banner_bottom .heart {
+    width: 24px;
+    height: 24px;
+  }
+
+  .banner_bottom .container {
+    bottom: 36px;
+    gap: 8px;
   }
 
   .music-btn {
@@ -1866,7 +1882,12 @@ body.is-locked {
     font-size: clamp(16px, 4.4cqi, 20px);
   }
   .banner_bottom h2 {
-    font-size: 50px;
+    font-size: 64px;
+  }
+
+  .banner_bottom .heart {
+    width: 32px;
+    height: 32px;
   }
   .music-btn {
     width: 56px;

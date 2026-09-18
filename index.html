@@ -388,6 +388,60 @@
         </div>
       </section>
 
+      <section class="gifts-section reveal" id="gifts">
+        <h2 class="section-heading">MỪNG CƯỚI</h2>
+        <p class="gifts-message" data-bind="gifts.message">
+          Mọi lời chúc phúc, sự yêu thương cùng những món quà ý nghĩa từ phương
+          xa gửi về
+        </p>
+        <div class="gifts-grid">
+          <article class="gift-card">
+            <p class="gift-role" data-bind="gifts.groom.role">Chú rể</p>
+            <div class="gift-qr-frame">
+              <img
+                class="gift-qr"
+                data-src="gifts.groom.qr"
+                alt="Mã QR chuyển khoản chú rể Nguyễn Minh Đức"
+              />
+            </div>
+            <p class="gift-name" data-bind="gifts.groom.name">Nguyễn Minh Đức</p>
+            <p class="gift-bank" data-bind="gifts.groom.bank">MB Bank</p>
+            <button
+              type="button"
+              class="gift-account"
+              data-copy="6996996991998"
+              aria-label="Sao chép số tài khoản chú rể"
+            >
+              <span data-bind="gifts.groom.account">6996996991998</span>
+              <span class="gift-copy-hint">Sao chép</span>
+            </button>
+          </article>
+          <article class="gift-card">
+            <p class="gift-role" data-bind="gifts.bride.role">Cô dâu</p>
+            <div class="gift-qr-frame">
+              <img
+                class="gift-qr"
+                data-src="gifts.bride.qr"
+                alt="Mã QR chuyển khoản cô dâu Phan Thị Giang"
+              />
+            </div>
+            <p class="gift-name" data-bind="gifts.bride.name">Phan Thị Giang</p>
+            <p class="gift-bank" data-bind="gifts.bride.bank">
+              BIDV - PGD Thanh Chương
+            </p>
+            <button
+              type="button"
+              class="gift-account"
+              data-copy="5111027033"
+              aria-label="Sao chép số tài khoản cô dâu"
+            >
+              <span data-bind="gifts.bride.account">5111027033</span>
+              <span class="gift-copy-hint">Sao chép</span>
+            </button>
+          </article>
+        </div>
+      </section>
+
       <section class="banner_bottom" id="thank-you">
         <div class="quote-photo-wrap">
           <img

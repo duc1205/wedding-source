@@ -340,11 +340,35 @@
     });
   };
 
+  const setupGifts = () => {
+    document.querySelectorAll(".gift-account").forEach((button) => {
+      const number = button.dataset.copy || button.textContent.trim();
+      const hint = button.querySelector(".gift-copy-hint");
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(number);
+          if (hint) {
+            const prev = hint.textContent;
+            hint.textContent = "Đã sao chép";
+            button.classList.add("is-copied");
+            setTimeout(() => {
+              hint.textContent = prev;
+              button.classList.remove("is-copied");
+            }, 1600);
+          }
+        } catch {
+          window.prompt("Sao chép số tài khoản", number);
+        }
+      });
+    });
+  };
+
   applyBindings();
   setBackgrounds();
   renderCalendar();
   startCountdown();
   setupAlbum();
+  setupGifts();
   setupReveal();
   setupMusic();
   setupCover();

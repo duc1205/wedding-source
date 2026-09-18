@@ -93,4 +93,23 @@ window.WEDDING = {
     title: "Cưới Nhau Đi (Yes I Do)",
     startSeconds: 33,
   },
+
+  gifts: {
+    message:
+      "Mọi lời chúc phúc, sự yêu thương cùng những món quà ý nghĩa từ phương xa gửi về",
+    groom: {
+      role: "Chú rể",
+      name: "Nguyễn Minh Đức",
+      bank: "MB Bank",
+      account: "6996996991998",
+      qr: "assets/images/qr-groom.png",
+    },
+    bride: {
+      role: "Cô dâu",
+      name: "Phan Thị Giang",
+      bank: "BIDV - PGD Thanh Chương",
+      account: "5111027033",
+      qr: "assets/images/qr-bride.png",
+    },
+  },
 };
